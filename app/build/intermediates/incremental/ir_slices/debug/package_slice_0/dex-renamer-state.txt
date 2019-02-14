@@ -1,0 +1,4 @@
+#Thu Feb 14 12:05:26 CET 2019
+base.0=G\:\\Android\\studentApp\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\0
+path.0=classes.dex
+renamed.0=classes.dex
