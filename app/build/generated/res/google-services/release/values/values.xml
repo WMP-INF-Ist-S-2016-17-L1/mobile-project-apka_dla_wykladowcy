@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="default_web_client_id" translatable="false">191517528760-n1qica6u16ddcot3rjcugp8l7vithqji.apps.googleusercontent.com</string>
+    <string name="firebase_database_url" translatable="false">https://studentapp-49955.firebaseio.com</string>
+    <string name="gcm_defaultSenderId" translatable="false">191517528760</string>
+    <string name="google_api_key" translatable="false">AIzaSyAOdwRKjCtsQchM0K96qQt_x6ZiK7WVFQE</string>
+    <string name="google_app_id" translatable="false">1:191517528760:android:a0ae1374f3b5b6c5</string>
+    <string name="google_crash_reporting_api_key" translatable="false">AIzaSyAOdwRKjCtsQchM0K96qQt_x6ZiK7WVFQE</string>
+    <string name="google_storage_bucket" translatable="false">studentapp-49955.appspot.com</string>
+    <string name="project_id" translatable="false">studentapp-49955</string>
+</resources>

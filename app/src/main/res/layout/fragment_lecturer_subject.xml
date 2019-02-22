@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".lecturerSubject">
+
+    <!-- TODO: Update blank fragment layout -->
+    <RelativeLayout
+        android:id="@+id/lecturer_subject_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/add_year_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="30dp"
+            android:textSize="20sp"
+            android:text="Add first year"/>
+
+        <TextView
+            android:id="@+id/add_next_year_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="30dp"
+            android:textSize="20sp"
+            android:text="Add next year"
+            android:visibility="invisible"/>
+
+        <TextView
+            android:id="@+id/add_group_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="30dp"
+            android:textSize="20sp"
+            android:text="Add first group"
+            android:visibility="invisible"/>
+
+        <TextView
+            android:id="@+id/add_next_group_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="30dp"
+            android:textSize="20sp"
+            android:text="Add next group"
+            android:visibility="invisible"/>
+
+        <android.inputmethodservice.ExtractEditText
+            android:id="@+id/add_year_edit"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/add_next_year_text"/>
+
+        <Button
+            android:id="@+id/add_year_button"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/add_year_edit"
+            android:layout_marginTop="15dp"
+            android:background="@drawable/round_bg"
+            android:text="ADD" />
+
+        <Button
+            android:id="@+id/add_group_button"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/add_year_edit"
+            android:layout_marginTop="15dp"
+            android:background="@drawable/round_bg"
+            android:text="ADD"
+            android:visibility="invisible"/>
+
+        <ProgressBar
+            android:id="@+id/add_progress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="15dp"
+            android:layout_below="@+id/add_year_edit"
+            android:background="@drawable/round_bg"/>
+
+        <ListView
+            android:id="@+id/years_list"
+            android:layout_width="300dp"
+            android:layout_height="match_parent"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="40dp"
+            android:layout_below="@+id/add_progress"
+            android:clickable="true"/>
+
+        <ListView
+            android:id="@+id/group_list"
+            android:layout_width="300dp"
+            android:layout_height="match_parent"
+            android:visibility="invisible"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="40dp"
+            android:layout_below="@+id/add_progress"
+            android:clickable="true"/>
+
+    </RelativeLayout>
+</FrameLayout>

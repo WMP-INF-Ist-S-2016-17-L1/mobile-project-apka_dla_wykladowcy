@@ -3,16 +3,94 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorPrimary"
     tools:context=".studentSubject">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:id="@+id/subject_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="150dp"
-        android:layout_marginTop="100dp"
-        android:text="Subjects"
-        android:textSize="26dp"/>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/lecturer_text"
+            android:layout_width="270dp"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="40dp"
+            android:text="Find group by lecturer's e-mail address"
+            android:textAlignment="center"
+            android:textSize="26dp"/>
+
+        <TextView
+            android:id="@+id/lecturer_groups_text"
+            android:layout_width="270dp"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="40dp"
+            android:text="Choose lecturer's group to join"
+            android:textAlignment="center"
+            android:textSize="26dp"
+            android:visibility="invisible"/>
+
+        <EditText
+            android:id="@+id/find_lecturer"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/lecturer_text"
+            android:layout_marginTop="20dp"/>
+
+        <Button
+            android:id="@+id/find_lecturer_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/find_lecturer"
+            android:layout_marginTop="15dp"
+            android:text="Find"/>
+
+        <ListView
+            android:id="@+id/subjects_list"
+            android:layout_width="300dp"
+            android:layout_height="match_parent"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/find_lecturer_button"
+            android:layout_marginBottom="70dp"
+            android:visibility="invisible"
+            android:clickable="true"/>
+
+        <ListView
+            android:id="@+id/find_lecturer_list"
+            android:layout_width="300dp"
+            android:layout_height="match_parent"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/find_lecturer_button"
+            android:layout_marginBottom="70dp"
+            android:visibility="invisible"
+            android:clickable="true"/>
+
+        <ListView
+            android:id="@+id/find_lecturer_years_list"
+            android:layout_width="300dp"
+            android:layout_height="match_parent"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/find_lecturer_button"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="70dp"
+            android:visibility="invisible"
+            android:clickable="true"/>
+
+        <ListView
+            android:id="@+id/find_lecturer_groups_list"
+            android:layout_width="300dp"
+            android:layout_height="match_parent"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/find_lecturer_button"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="70dp"
+            android:visibility="invisible"
+            android:clickable="true"/>
+
+    </RelativeLayout>
 
 </FrameLayout>

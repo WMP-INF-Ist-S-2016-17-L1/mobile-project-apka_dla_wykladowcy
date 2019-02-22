@@ -1,6 +1,7 @@
 package com.example.studentapp;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -19,7 +20,14 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class register extends AppCompatActivity {
 
@@ -29,13 +37,22 @@ public class register extends AppCompatActivity {
     private TextView loginText;
     private CheckBox checkBox;
     private ImageView image;
+    private boolean lecturer;
 
     private FirebaseAuth mAuth;
+    private DatabaseReference mDatabase;
+
+    SharedPreferences pref;
+    SharedPreferences.Editor editor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
+
+        pref = getApplicationContext().getSharedPreferences("com.example.studentApp", 0);
+        editor = pref.edit();
+        editor.clear().commit();
 
         userName = findViewById(R.id.name);
         checkBox = findViewById(R.id.lecturer);
@@ -147,6 +164,27 @@ public class register extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
                         if(task.isSuccessful()){
+                            mAuth = FirebaseAuth.getInstance();
+                            if(mAuth.getCurrentUser() != null){
+                                mDatabase = FirebaseDatabase.getInstance().getReference();
+                                mDatabase.keepSynced(true);
+
+                                mDatabase.child("Users").child(mAuth.getCurrentUser().getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                        User data = dataSnapshot.getValue(User.class);
+                                        lecturer = data.getLecturer();
+                                        editor.putBoolean("Lecturer", lecturer).commit();
+                                        updateUI();
+                                    }
+
+                                    @Override
+                                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                                    }
+                                });
+
+                            }
                             updateUI();
                         }
                     }
@@ -154,7 +192,7 @@ public class register extends AppCompatActivity {
     }
 
     private void updateUI() {
-        Intent home = new Intent(getApplicationContext(), studentHome.class);
+        Intent home = new Intent(getApplicationContext(), com.example.studentapp.home.class);
         startActivity(home);
     }
 

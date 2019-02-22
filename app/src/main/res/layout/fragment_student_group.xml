@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".studentGroup">
+
+    <!-- TODO: Update blank fragment layout -->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/group_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="50dp"
+            android:textSize="25dp"
+            android:text="Group" />
+
+        <Button
+            android:id="@+id/student_group_test_btn"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/group_text"
+            android:layout_marginTop="25dp"
+            android:background="@drawable/round_bg"
+            android:text="Kolokwium"/>
+
+        <Button
+            android:id="@+id/student_group_lessons_btn"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/student_group_test_btn"
+            android:layout_marginTop="15dp"
+            android:background="@drawable/round_bg"
+            android:text="Oddwołane zajęcia"/>
+
+
+        <ListView
+            android:id="@+id/student_invite"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/group_text"
+            android:layout_marginTop="20dp"
+            android:visibility="invisible" />
+
+        <ListView
+            android:id="@+id/students"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"
+            android:layout_below="@+id/group_text"
+            android:visibility="invisible"
+            android:clickable="false"/>
+
+</RelativeLayout>
+</FrameLayout>

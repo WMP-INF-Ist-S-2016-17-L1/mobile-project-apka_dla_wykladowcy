@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".lecturerGroup">
+
+    <!-- TODO: Update blank fragment layout -->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/group_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="50dp"
+            android:textSize="25dp"
+            android:text="Group" />
+
+        <Button
+            android:id="@+id/group_accept_btn"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/group_text"
+            android:layout_marginTop="25dp"
+            android:background="@drawable/round_bg"
+            android:text="Pokaż prośby o zaakceptowanie"/>
+
+        <Button
+            android:id="@+id/group_students_btn"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/group_accept_btn"
+            android:layout_marginTop="25dp"
+            android:background="@drawable/round_bg"
+            android:text="Pokaż studentów w grupie"/>
+
+        <Button
+            android:id="@+id/group_test_btn"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/group_students_btn"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/round_bg"
+            android:text="Dodaj kolokwium"/>
+
+        <Button
+            android:id="@+id/group_lesson_btn"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"
+            android:layout_below="@+id/group_test_btn"
+            android:background="@drawable/round_bg"
+            android:text="Odwołaj zajęcia"/>
+
+        <Button
+            android:id="@+id/back_button"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="80dp"
+            android:background="@drawable/round_bg"
+            android:text="Back"
+            android:visibility="invisible"/>
+
+        <ListView
+            android:id="@+id/student_invite"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/group_text"
+            android:layout_marginTop="20dp"
+            android:visibility="invisible" />
+
+        <ListView
+            android:id="@+id/students"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"
+            android:layout_below="@+id/group_text"
+            android:visibility="invisible"
+            android:clickable="false"/>
+
+    </RelativeLayout>
+
+</FrameLayout>

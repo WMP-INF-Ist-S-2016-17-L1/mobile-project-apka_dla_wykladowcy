@@ -1,7 +1,10 @@
 package com.example.studentapp;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -15,6 +18,7 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.gms.tasks.TaskCompletionSource;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -31,15 +35,22 @@ public class login extends AppCompatActivity {
     private ProgressBar progressBar;
     private ImageView image;
     private Intent home;
-    boolean lecturer;
+    private boolean lecturer;
 
     private FirebaseAuth mAuth;
     private DatabaseReference mDatabase;
+
+    SharedPreferences pref;
+    SharedPreferences.Editor editor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        pref = getApplicationContext().getSharedPreferences("com.example.studentApp", 0);
+        editor = pref.edit();
+        editor.clear().commit();
 
         userMail = findViewById(R.id.email);
         userPassword = findViewById(R.id.password);
@@ -47,12 +58,31 @@ public class login extends AppCompatActivity {
         loginBtn = findViewById(R.id.login_btn);
         progressBar = findViewById(R.id.progress_bar);
         image = findViewById(R.id.image);
-        home = new Intent(this, studentHome.class);
+        home = new Intent(this, com.example.studentapp.home.class);
 
         progressBar.setVisibility(View.INVISIBLE);
 
         mAuth = FirebaseAuth.getInstance();
+        if(mAuth.getCurrentUser() != null){
+            mDatabase = FirebaseDatabase.getInstance().getReference();
+            mDatabase.keepSynced(true);
 
+            mDatabase.child("Users").child(mAuth.getCurrentUser().getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    User data = dataSnapshot.getValue(User.class);
+                    lecturer = data.getLecturer();
+                    editor.putBoolean("Lecturer", lecturer).commit();
+                    updateUI();
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                }
+            });
+
+        }
 
         loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -81,21 +111,23 @@ public class login extends AppCompatActivity {
     }
 
     private void singIn(String mail, String password) {
+        editor.clear().commit();
         mAuth.signInWithEmailAndPassword(mail,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if(task.isSuccessful()){
                     loginBtn.setVisibility(View.VISIBLE);
                     progressBar.setVisibility(View.INVISIBLE);
-
                     mDatabase = FirebaseDatabase.getInstance().getReference();
+                    mDatabase.keepSynced(true);
 
-
-                    mDatabase.child("Users").addValueEventListener(new ValueEventListener() {
+                    mDatabase.child("Users").child(mAuth.getCurrentUser().getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                             User data = dataSnapshot.getValue(User.class);
-                            lecturer = data.lecturer;
+                            lecturer = data.getLecturer();
+                            editor.putBoolean("Lecturer", lecturer).commit();
+                            updateUI();
                         }
 
                         @Override
@@ -103,61 +135,41 @@ public class login extends AppCompatActivity {
 
                         }
                     });
-
-                    if(lecturer){
-                        updateLecturerUI();
-                    } else{
-                        updateStudentUI();
-                    }
                 } else{
                     showMessage(task.getException().getMessage());
+                    loginBtn.setVisibility(View.VISIBLE);
+                    progressBar.setVisibility(View.INVISIBLE);
                 }
             }
         });
-
     }
 
-    private void updateStudentUI() {
-        Intent studentHome = new Intent(getApplicationContext(), studentHome.class);
-        startActivity(studentHome);
+    private void getLecturer(){
+        mDatabase = FirebaseDatabase.getInstance().getReference();
+        mDatabase.keepSynced(true);
+
+        mDatabase.child("Users").child(mAuth.getCurrentUser().getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                User data = dataSnapshot.getValue(User.class);
+                lecturer = data.getLecturer();
+                editor.putBoolean("Lecturer", lecturer).commit();
+                boolean sth = pref.getBoolean("Lecturer", false);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
     }
 
-    private void updateLecturerUI() {
-        Intent lecturerHome = new Intent(getApplicationContext(), lecturerHome.class);
-        startActivity(lecturerHome);
+    private void updateUI() {
+        Intent home = new Intent(getApplicationContext(), home.class);
+        startActivity(home);
     }
 
     private void showMessage(String text) {
         Toast.makeText(getApplicationContext(), text, Toast.LENGTH_LONG).show();
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-        mAuth = FirebaseAuth.getInstance();
-
-        if(mAuth.getCurrentUser() != null){
-            mDatabase = FirebaseDatabase.getInstance().getReference();
-
-            mDatabase.child("Users").child(mAuth.getCurrentUser().getUid()).addValueEventListener(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                    User data = dataSnapshot.getValue(User.class);
-                    lecturer = data.getLecturer();
-                    Log.d("TAG", Boolean.toString(lecturer));
-                }
-
-                @Override
-                public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                }
-            });
-            lecturer = true;
-            if(lecturer == true){
-                updateLecturerUI();
-            } else{
-                updateStudentUI();
-            }
-        }
     }
 }

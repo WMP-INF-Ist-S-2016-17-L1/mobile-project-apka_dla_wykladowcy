@@ -4,12 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorPrimary"
     tools:context=".login">
 
     <ImageView
         android:id="@+id/image"
         android:layout_width="wrap_content"
-        android:layout_height="150dp"
+        android:layout_height="110dp"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="40dp"
         app:srcCompat="@drawable/ic_student_logo" />
@@ -30,7 +31,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/text"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="120dp"
+        android:layout_marginTop="100dp"
         android:ems="10"
         android:inputType="textEmailAddress"
         android:hint="E-mail adress"/>
@@ -52,7 +53,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/password"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="5dp"
         android:text="Don't have account? Click!" />
 
     <Button
